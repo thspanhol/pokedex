@@ -1,11 +1,12 @@
 import { connect } from "react-redux";
 import { selectAction } from "../redux/actions/selectactions";
 import { useEffect } from "react";
+import axios from "axios";
 
 function Home(props) {
 
   const { dispatch } = props;
-  const api = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0";
+  const API = "https://pokeapi.co/api/v2/pokemon?limit=151";
 
   function array_chunk(arr, len) {
     let chunks = [], i = 0, n = arr.length
@@ -15,43 +16,40 @@ function Home(props) {
     return chunks
   }
 
-  const getPokemons = async (param) => {
-    const response = await fetch(param);
-    const data = await response.json();
-    console.log(array_chunk(data.results.slice(0, 1273), 20));
-    dispatch(selectAction(array_chunk(data.results.slice(0, 1273), 20)));
+  const getType = async (param) => {
   };
 
-  const getType = async (param) => {
-    const response = await fetch(param);
-    const data = await response.json();
-    console.log(array_chunk(data.pokemon, 20));
-    dispatch(selectAction(array_chunk(data.pokemon, 20)));
-  };
+  const getPokemons = async (param) => {
+    let results = [];
+    await axios
+    .get(param)
+    .then((res) => results = res.data.results)
+    .catch((err) => console.log(err));
+    const endPoints = results.map((e) => e.url);
+    axios.all(endPoints.map((endpoint) => axios.get(endpoint))).then((res) => dispatch(selectAction(array_chunk(res, 20))));
+  }
 
   useEffect(() => {
-    getPokemons(api);
+    getPokemons(API);
   }, []);
 
-  const filtro = (string) => {
-  var numsStr = string.replace(/[^0-9]/g,'');
-  return numsStr;
-  };
+  const ttt = () => {
+    props.selectedColor[0].map((e) => {
+      <div>
+        <h2>{e.data.name}</h2>
+      </div>
+    });
+  }
 
   return (
     <div>
       <h1>Teste</h1>
-      <h2>{props.selectedColor.length}</h2>
-      <button onClick={() => getType('https://pokeapi.co/api/v2/type/10')}>Fire</button>
-      {props.selectedColor.next && <button onClick={() => getPokemons(props.selectedColor.next)}>Próximos 20</button>}
-      {props.selectedColor.previous && <button onClick={() => getPokemons(props.selectedColor.previous)}>20 Anteriores</button>}
-      {props.selectedColor && props.selectedColor[1]
-      .map((e) => 
-        <div>
-            <h1>{e.name || e.pokemon.name}</h1>
-            <img alt={e.name} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${filtro(e.url || e.pokemon.url).substring(1)}.png`}/>
-        </div>
-      )}
+      {props.selectedColor[0] && props.selectedColor[0].map((e) => 
+      <div>
+        <img alt={e.data.name} src={Object.values(e.data.sprites.other)[2].front_default}/>
+        <h2>{e.data.name}</h2>
+        {e.data.types.map((e) => <h3>{e.type.name}</h3>)}
+      </div>)}
     </div>
   );
 }
