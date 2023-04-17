@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { selectAction } from "../../redux/actions/selectactions";
+import { setPokedex, setPokemon } from "../../redux/actions/selectactions";
 import { useEffect } from "react";
 import axios from "axios";
 import Card from "../../Componentes/Card";
@@ -31,8 +31,10 @@ function Home(props) {
     .catch((err) => console.log(err));
     let endPoints = results.map((e) => e.url || e.pokemon.url);
     endPoints = endPoints.filter((e) => filtro(e) <= 151);
-    axios.all(endPoints.map((endpoint) => axios.get(endpoint))).then((res) => dispatch(selectAction(divideArray(res, 20))));
+    axios.all(endPoints.map((endpoint) => axios.get(endpoint))).then((res) => dispatch(setPokedex(divideArray(res, 20))));
   }
+
+  const selectPokemon = (param) => dispatch(setPokemon(param));
 
   useEffect(() => {
     getPokemons(API);
@@ -42,13 +44,17 @@ function Home(props) {
     <div>
       <h1>Teste</h1>
       {types.map((e) => <button onClick={() => getPokemons(`https://pokeapi.co/api/v2/type/${e.number}`)}>{e.type}</button>)}
-      {props.selectedColor[0] && props.selectedColor[0].map((e) => <Card name={e.data.name} sprite={Object.values(e.data.sprites.other)[2].front_default} types={e.data.types} />)}
+      {props.pokedex[0] ? (
+        props.pokedex[0].map((e) => <Card name={e.data.name} sprite={Object.values(e.data.sprites.other)[2].front_default} selectPokemon={selectPokemon} pokemon={e.data} types={e.data.types} />)
+      ) : (
+        <h1>Loading</h1>
+      )}
     </div>
   );
 }
 
 const mapStateToProps = (store) => ({
-    selectedColor: store.selectcolorreducer.selectedColor,
+    pokedex: store.pokemonreducer.pokedex,
   });
   
   export default connect(mapStateToProps)(Home);

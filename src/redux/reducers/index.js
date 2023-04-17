@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import selectcolorreducer from "./selectcolorreducer";
+import pokemonreducer from "./pokemonreducer";
 import userreducer from "./userreducer";
 
 const rootReducer = combineReducers({
-    selectcolorreducer,
+    pokemonreducer,
     userreducer,
 });
 

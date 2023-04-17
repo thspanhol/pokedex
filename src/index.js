@@ -5,12 +5,31 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+  createHashRouter,
+} from "react-router-dom";
+import Home from './Pages/Home';
+import Pokemon from './Pages/Pokemon';
+
+const routerHash = createHashRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/*", element: <Pokemon /> },
+    ],
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <RouterProvider router={routerHash} />
     </Provider>
   </React.StrictMode>
 );
