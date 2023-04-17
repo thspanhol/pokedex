@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { setPokedex, setPokemon } from "../../redux/actions/selectactions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "../../Componentes/Card";
 
@@ -8,6 +8,8 @@ function Home(props) {
 
   const { dispatch } = props;
   const API = "https://pokeapi.co/api/v2/pokemon?limit=151";
+  const [index, setIndex] = useState(0);
+  const [page, setPage] = useState(0);
   const types = [{type: 'Normal', number: 1}, {type: 'Fighting', number: 2}, {type: 'Flying', number: 3}, {type: 'Poison', number: 4}, {type: 'Ground', number: 5}, {type: 'Rock', number: 6}, {type: 'Bug', number: 7}, {type: 'Ghost', number: 8}, {type: 'Steel', number: 9}, {type: 'Fire', number: 10}, {type: 'Water', number: 11}, {type: 'Grass', number: 12}, {type: 'Electric', number: 13}, {type: 'Psychic', number: 14}, {type: 'Ice', number: 15}, {type: 'Dragon', number: 16}, {type: 'Dark', number: 17}, {type: 'Fairy', number: 18}];
 
   const divideArray = (arr, len) => {
@@ -31,7 +33,10 @@ function Home(props) {
     .catch((err) => console.log(err));
     let endPoints = results.map((e) => e.url || e.pokemon.url);
     endPoints = endPoints.filter((e) => filtro(e) <= 151);
-    axios.all(endPoints.map((endpoint) => axios.get(endpoint))).then((res) => dispatch(setPokedex(divideArray(res, 20))));
+    axios.all(endPoints.map((endpoint) => axios.get(endpoint))).then((res) => {
+      dispatch(setPokedex(divideArray(res, 20)))
+      setIndex(divideArray(res, 20).length)
+    });
   }
 
   const selectPokemon = (param) => dispatch(setPokemon(param));
@@ -40,15 +45,26 @@ function Home(props) {
     getPokemons(API);
   }, []);
 
+  console.log(index);
+
   return (
     <div>
       <h1>Teste</h1>
       {types.map((e) => <button onClick={() => getPokemons(`https://pokeapi.co/api/v2/type/${e.number}`)}>{e.type}</button>)}
-      {props.pokedex[0] ? (
-        props.pokedex[0].map((e) => <Card name={e.data.name} sprite={Object.values(e.data.sprites.other)[2].front_default} selectPokemon={selectPokemon} pokemon={e.data} types={e.data.types} />)
+      {props.pokedex[page] ? (
+        props.pokedex[page].map((e) => <Card name={e.data.name} sprite={Object.values(e.data.sprites.other)[2].front_default} selectPokemon={selectPokemon} pokemon={e.data} types={e.data.types} />)
       ) : (
         <h1>Loading</h1>
       )}
+      {index > 1 && page <= 7 && (<div><button disabled={page === 0} onClick={() => {
+        if (page > 0) {
+          setPage(page -1)
+        }
+      }}>{'<'}</button><button disabled={page === 7} onClick={() => {
+        if (page < 7) {
+          setPage(page +1)
+        }
+      }}>{'>'}</button></div>)}
     </div>
   );
 }
