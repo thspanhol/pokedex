@@ -11,7 +11,7 @@ function Home(props) {
   const [page, setPage] = useState([0,20]);
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('All');
-  const types = [{type: 'Normal', number: 1}, {type: 'Fighting', number: 2}, {type: 'Flying', number: 3}, {type: 'Poison', number: 4}, {type: 'Ground', number: 5}, {type: 'Rock', number: 6}, {type: 'Bug', number: 7}, {type: 'Ghost', number: 8}, {type: 'Steel', number: 9}, {type: 'Fire', number: 10}, {type: 'Water', number: 11}, {type: 'Grass', number: 12}, {type: 'Electric', number: 13}, {type: 'Psychic', number: 14}, {type: 'Ice', number: 15}, {type: 'Dragon', number: 16}, {type: 'Dark', number: 17}, {type: 'Fairy', number: 18}];
+  const types = [{type: 'Normal', number: 1, color: '#A8A77A'}, {type: 'Fighting', number: 2, color: '#C22E28'}, {type: 'Flying', number: 3, color: '#A98FF3'}, {type: 'Poison', number: 4, color: '#A33EA1'}, {type: 'Ground', number: 5, color: '#E2BF65'}, {type: 'Rock', number: 6, color: '#B6A136'}, {type: 'Bug', number: 7, color: '#A6B91A'}, {type: 'Ghost', number: 8, color: '#735797'}, {type: 'Steel', number: 9, color: '#B7B7CE'}, {type: 'Fire', number: 10, color: '#EE8130'}, {type: 'Water', number: 11, color: '#6390F0'}, {type: 'Grass', number: 12, color: '#7AC74C'}, {type: 'Electric', number: 13, color: '#F7D02C'}, {type: 'Psychic', number: 14, color: '#F95587'}, {type: 'Ice', number: 15, color: '#96D9D6'}, {type: 'Dragon', number: 16, color: '#6F35FC'}, {type: 'Dark', number: 17, color: '#705746'}, {type: 'Fairy', number: 18, color: '#D685AD'}];
 
   const filtro = (string) => {
     var numsStr = string.replace(/[^0-9]/g,'');
@@ -37,16 +37,36 @@ function Home(props) {
     }
   }
 
+  const colours = {
+    normal: '#A8A77A',
+    fire: '#EE8130',
+    water: '#6390F0',
+    electric: '#F7D02C',
+    grass: '#7AC74C',
+    ice: '#96D9D6',
+    fighting: '#C22E28',
+    poison: '#A33EA1',
+    ground: '#E2BF65',
+    flying: '#A98FF3',
+    psychic: '#F95587',
+    bug: '#A6B91A',
+    rock: '#B6A136',
+    ghost: '#735797',
+    dragon: '#6F35FC',
+    dark: '#705746',
+    steel: '#B7B7CE',
+    fairy: '#D685AD',
+  };
+
 
   useEffect(() => {
     getPokemons(API);
   }, []);
 
-
-
   return (
     <div>
       <div>
+        <img alt="icon" src="./icon-pokebola.png" />
         <input type="text" value={search} onChange={(e) => {
           setSearch(e.target.value)
           if (e.target.value !== '') {
@@ -55,8 +75,8 @@ function Home(props) {
             setPage([0,20]);
           }
         }}/>
-      </div>
-      {types.map((e) => <button key={`${e.type}-button`} onClick={() => {
+        <div>
+          {types.map((e) => <button style={{background: sort === e.type ? e.color : '#777'}} key={`${e.type}-button`} onClick={() => {
         if (sort === e.type) {
           getPokemons(API);
           setSort('All');
@@ -67,9 +87,12 @@ function Home(props) {
           setPage([0,20]);
         }
       }}>{e.type}</button>)}
+        </div>
+        
+      </div>
 
       {props.pokedex ? (
-        props.pokedex.slice(page[0],page[1]).map((e) => e.data.name.startsWith(search.toLowerCase()) && <Card key={e.data.name} name={e.data.name} sprite={Object.values(e.data.sprites.other)[2].front_default} selectPokemon={selectPokemon} pokemon={e.data} types={e.data.types} />)
+        props.pokedex.slice(page[0],page[1]).map((e) => e.data.name.startsWith(search.toLowerCase()) && <Card key={e.data.name} name={e.data.name} sprite={Object.values(e.data.sprites.other)[2].front_default} selectPokemon={selectPokemon} pokemon={e.data} types={e.data.types} colours={colours} />)
       ) : (
         <h1>Loading</h1>
       )}
