@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
+import './pokemon.css'
 
 const Pokemon = ({pokemon}) => {
   const colours = {
@@ -23,25 +24,31 @@ const Pokemon = ({pokemon}) => {
     fairy: '#D685AD',
   };
     return (
-        <div>
+        <div className="page">
             {pokemon ? (
-                <div>
-                  <h1>{pokemon.name[0].toUpperCase() + pokemon.name.substring(1)}</h1>
-                  <h2>{`#${pokemon.id}`}</h2>
+                <div className="info">
+                  <div className="image">
+                    <h1>{pokemon.name[0].toUpperCase() + pokemon.name.substring(1)}</h1>
+                  <h2>{'#'+`00${pokemon.id}`.slice(-3)}</h2>
                   <div>
                   {pokemon.types.map((e) => <h3 key={e.type.name} style={{background: colours[e.type.name]}}>{e.type.name[0].toUpperCase() + e.type.name.substring(1)}</h3>)}
                   </div>
                   <img alt={pokemon.name} src={Object.values(pokemon.sprites.other)[2].front_default} />
-                  <div>
+                  </div>
+                  
+                  <div className="stats">
                     <div>
-                      <img alt={`${pokemon.name}-game_sprite`} src={pokemon.sprites.back_default} />
+                      <img className="firstchibi" alt={`${pokemon.name}-game_sprite`} src={pokemon.sprites.back_default} />
                       <h2>Game status</h2>
-                      <img alt={`${pokemon.name}-game_sprite`} src={pokemon.sprites.front_default} />
+                      <img className="secoundchibi" alt={`${pokemon.name}-game_sprite`} src={pokemon.sprites.front_default} />
+                    </div>
+                    <div className="numbers">
+                      {pokemon.stats.map((e) => <h3 key={e.stat.name}>{`${e.stat.name[0].toUpperCase() + e.stat.name.substring(1)}: ${e.base_stat}`}</h3>)}
                     </div>
                     
-                    {pokemon.stats.map((e) => <h3 key={e.stat.name}>{`${e.stat.name[0].toUpperCase() + e.stat.name.substring(1)}: ${e.base_stat}`}</h3>)}
+                    <Link to='/' className="link">Back</Link>
                   </div>
-                  <Link to='/'>Voltar</Link>
+                  
                 </div>
             ) : (
               <Navigate to='/' />

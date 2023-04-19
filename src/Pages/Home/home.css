@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: whitesmoke;
+    min-height: 100vh;  
+}
+.bar {
+    display: flex;
+    width: 100%;
+    max-width: 1600px;
+    background: #252525;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 0 0 15px 15px;
+}
+.bar input {
+    height: 30px;
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 0 0 0 5px;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium';
+    color: #252525;
+}
+.bar div {
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.bar div button {
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+    width: 100px;
+    height: 25px;
+    margin: 3px;
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.bar div button:hover {
+    color: whitesmoke;
+    width: 110px;
+    transition: 0.2s;
+}
+.pokedex {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1600px;
+    justify-content: center;
+}
+.skip button{
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+    background: #252525;
+    color: white;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    border-radius: 25px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+.skip button:nth-child(1){
+    margin-right: 20px;
+}

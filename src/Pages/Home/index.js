@@ -3,11 +3,13 @@ import { setPokedex, setPokemon } from "../../redux/actions/selectactions";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "../../Componentes/Card";
+import './home.css'
 
 function Home(props) {
 
   const { dispatch } = props;
-  const API = "https://pokeapi.co/api/v2/pokemon?limit=151";
+  const limit = 251;
+  const API = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`;
   const [page, setPage] = useState([0,20]);
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('All');
@@ -25,14 +27,14 @@ function Home(props) {
     .then((res) => results = res.data.results || res.data.pokemon)
     .catch((err) => console.log(err));
     let endPoints = results.map((e) => e.url || e.pokemon.url);
-    endPoints = endPoints.filter((e) => filtro(e) <= 151);
+    endPoints = endPoints.filter((e) => filtro(e) <= limit);
     axios.all(endPoints.map((endpoint) => axios.get(endpoint))).then((res) => dispatch(setPokedex(res)));
   }
 
   const selectPokemon = (param) => dispatch(setPokemon(param));
 
   const noPokemon = () => {
-    if (props.pokedex && props.pokedex.slice(page[0],page[1]).filter((e) => e.data.name.startsWith(search)).length === 0) {
+    if (props.pokedex && props.pokedex.slice(page[0],page[1]).filter((e) => e.data.name.startsWith(search.toLowerCase())).length === 0) {
       return <h1>Nenhum Pokemon Encontrado</h1>;
     }
   }
@@ -58,15 +60,15 @@ function Home(props) {
     fairy: '#D685AD',
   };
 
-
   useEffect(() => {
     getPokemons(API);
   }, []);
 
   return (
-    <div>
-      <div>
-        <img alt="icon" src="./icon-pokebola.png" />
+    <div className="home">
+      <div className="bar">
+       
+          <img alt="icon" src="./icon-pokebola.png" />
         <input type="text" value={search} onChange={(e) => {
           setSearch(e.target.value)
           if (e.target.value !== '') {
@@ -76,7 +78,7 @@ function Home(props) {
           }
         }}/>
         <div>
-          {types.map((e) => <button style={{background: sort === e.type ? e.color : '#777'}} key={`${e.type}-button`} onClick={() => {
+          {types.map((e) => <button testcolor="pink" style={{background: sort === e.type ? e.color : '#777'}} key={`${e.type}-button`} onClick={() => {
         if (sort === e.type) {
           getPokemons(API);
           setSort('All');
@@ -87,29 +89,29 @@ function Home(props) {
           setPage([0,20]);
         }
       }}>{e.type}</button>)}
+        
         </div>
+        
         
       </div>
 
-      {props.pokedex ? (
-        props.pokedex.slice(page[0],page[1]).map((e) => e.data.name.startsWith(search.toLowerCase()) && <Card key={e.data.name} name={e.data.name} sprite={Object.values(e.data.sprites.other)[2].front_default} selectPokemon={selectPokemon} pokemon={e.data} types={e.data.types} colours={colours} />)
+<div className="pokedex">
+  {props.pokedex ? (
+        props.pokedex.slice(page[0],page[1]).map((e) => e.data.name.startsWith(search.toLowerCase()) && <Card key={e.data.name} name={e.data.name} sprite={Object.values(e.data.sprites.other)[2].front_default} selectPokemon={selectPokemon} pokemon={e.data} types={e.data.types} colours={colours} id={e.data.id} />)
       ) : (
         <h1>Loading</h1>
       )}
-
-      {/* {props.pokedex && props.pokedex.slice(page[0],page[1]).filter((e) => e.data.name.startsWith(search)).length === 0 && <h1>Nenhum Pokemon Encontrado</h1>} */}
-
       {noPokemon()}
+</div>
+      
 
-
-      <div><button disabled={page[0] === 0} onClick={() => {
+      <div className="skip"><button disabled={page[0] === 0} onClick={() => {
         if (page[0] >= 20) {
           setPage([page[0] -20, page[1] -20])
         }
       }}>{'<'}</button><button disabled={page[1] >= props.pokedex.length} onClick={() => {
         if (page[1] < props.pokedex.length) {
           setPage([page[0] +20, page[1] +20])
-          console.log(props.pokedex.length);
         }
       }}>{'>'}</button></div>
     </div>

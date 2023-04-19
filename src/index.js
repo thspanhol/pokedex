@@ -6,9 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import {
-  createBrowserRouter,
   RouterProvider,
-  Navigate,
   createHashRouter,
 } from "react-router-dom";
 import Home from './Pages/Home';

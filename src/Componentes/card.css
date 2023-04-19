@@ -1,0 +1,30 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 10px;
+    cursor: default;
+}
+.card img{
+    background: lightgray;
+    border-radius: 15px;
+    width: 350px;
+}
+.name {
+    display: flex;
+}
+.name h2 {
+    margin: 5px 2.5px;
+}
+.name h2:nth-child(2) {
+    color: gray;
+}
+.types {
+    display: flex;
+}
+.types h3 {
+    width: 25%;
+    text-align: center;
+    padding: 2px 0 2px 0;
+    margin-right: 10px;
+    border-radius: 15px;
+}

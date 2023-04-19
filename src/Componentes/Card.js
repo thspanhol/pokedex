@@ -1,13 +1,19 @@
 import { Link } from "react-router-dom";
+import './card.css'
 
-const Card = ({name, sprite, types, selectPokemon, pokemon, colours}) => {
+const Card = ({name, sprite, types, selectPokemon, pokemon, colours, id}) => {
   return (
-      <div>
+      <div className="card">
         <Link onClick={() => selectPokemon(pokemon)} to={`/${name}`}>
           <img alt={name} src={sprite}/>
         </Link>
+        <div className="name">
         <h2>{name[0].toUpperCase() + name.substring(1)}</h2>
-        {types.map((e) => <h3 style={{background: colours[e.type.name]}} key={e.type.name}>{e.type.name[0].toUpperCase() + e.type.name.substring(1)}</h3>)}
+        <h2>{'#'+`00${id}`.slice(-3)}</h2>
+        </div>
+        <div className="types">
+          {types.map((e) => <h3 style={{background: colours[e.type.name]}} key={e.type.name}>{e.type.name[0].toUpperCase() + e.type.name.substring(1)}</h3>)}
+        </div>
       </div>
   );
 }
