@@ -4,7 +4,11 @@ import './card.css'
 const Card = ({name, sprite, types, selectPokemon, pokemon, colours, id}) => {
   return (
       <div className="card">
-        <Link onClick={() => selectPokemon(pokemon)} to={`/${name}`}>
+        <Link onClick={(e) => {
+          selectPokemon(pokemon);
+          let x = e.clientX;
+          let y = e.clientY;
+        }} to={`/${name}`}>
           <img alt={name} src={sprite}/>
         </Link>
         <div className="name">

@@ -2,6 +2,7 @@
     background: #252525;
     display: flex;
     min-height: 100vh;
+    min-width: 1000px;
     align-items: center;
     justify-content: center;
 }
@@ -9,6 +10,7 @@
     display: flex;
     background: whitesmoke;
     width: 1000px;
+    min-width: 1000px;
     height: 650px;
     align-items: center;
     justify-content: space-around;

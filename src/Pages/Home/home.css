@@ -51,7 +51,7 @@
 }
 .bar div button:hover {
     color: whitesmoke;
-    width: 110px;
+    width: 105px;
     transition: 0.2s;
 }
 .pokedex {
@@ -72,6 +72,9 @@
     border-radius: 25px;
     margin-bottom: 5px;
     cursor: pointer;
+}
+.skip button:disabled {
+    opacity: 0.5;
 }
 .skip button:nth-child(1){
     margin-right: 20px;

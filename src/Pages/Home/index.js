@@ -8,12 +8,20 @@ import './home.css'
 function Home(props) {
 
   const { dispatch } = props;
+  const [fPage, setFPage] = useState(parseInt(sessionStorage.getItem('fpage')));
+  const [lPage, setLPage] = useState(parseInt(sessionStorage.getItem('lpage')));
+  if (!fPage && !lPage) {
+    sessionStorage.setItem('fpage', 0)
+    sessionStorage.setItem('lpage', 20)
+  }
   const limit = 251;
   const API = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`;
-  const [page, setPage] = useState([0,20]);
   const [search, setSearch] = useState('');
-  const [sort, setSort] = useState('All');
-  const types = [{type: 'Normal', number: 1, color: '#A8A77A'}, {type: 'Fighting', number: 2, color: '#C22E28'}, {type: 'Flying', number: 3, color: '#A98FF3'}, {type: 'Poison', number: 4, color: '#A33EA1'}, {type: 'Ground', number: 5, color: '#E2BF65'}, {type: 'Rock', number: 6, color: '#B6A136'}, {type: 'Bug', number: 7, color: '#A6B91A'}, {type: 'Ghost', number: 8, color: '#735797'}, {type: 'Steel', number: 9, color: '#B7B7CE'}, {type: 'Fire', number: 10, color: '#EE8130'}, {type: 'Water', number: 11, color: '#6390F0'}, {type: 'Grass', number: 12, color: '#7AC74C'}, {type: 'Electric', number: 13, color: '#F7D02C'}, {type: 'Psychic', number: 14, color: '#F95587'}, {type: 'Ice', number: 15, color: '#96D9D6'}, {type: 'Dragon', number: 16, color: '#6F35FC'}, {type: 'Dark', number: 17, color: '#705746'}, {type: 'Fairy', number: 18, color: '#D685AD'}];
+  const [sort, setSort] = useState(sessionStorage.getItem('pokeType'));
+
+
+
+  const types = [{type: 'Normal', color: '#A8A77A'}, {type: 'Fighting', color: '#C22E28'}, {type: 'Flying', color: '#A98FF3'}, {type: 'Poison', color: '#A33EA1'}, {type: 'Ground', color: '#E2BF65'}, {type: 'Rock', color: '#B6A136'}, {type: 'Bug', color: '#A6B91A'}, {type: 'Ghost', color: '#735797'}, {type: 'Steel', color: '#B7B7CE'}, {type: 'Fire', color: '#EE8130'}, {type: 'Water', color: '#6390F0'}, {type: 'Grass', color: '#7AC74C'}, {type: 'Electric', color: '#F7D02C'}, {type: 'Psychic', color: '#F95587'}, {type: 'Ice', color: '#96D9D6'}, {type: 'Dragon', color: '#6F35FC'}, {type: 'Dark', color: '#705746'}, {type: 'Fairy', color: '#D685AD'}];
 
   const filtro = (string) => {
     var numsStr = string.replace(/[^0-9]/g,'');
@@ -34,7 +42,7 @@ function Home(props) {
   const selectPokemon = (param) => dispatch(setPokemon(param));
 
   const noPokemon = () => {
-    if (props.pokedex && props.pokedex.slice(page[0],page[1]).filter((e) => e.data.name.startsWith(search.toLowerCase())).length === 0) {
+    if (props.pokedex && props.pokedex.filter((e) => e.data.name.startsWith(search.toLowerCase())).length === 0) {
       return <h1>Nenhum Pokemon Encontrado</h1>;
     }
   }
@@ -61,7 +69,11 @@ function Home(props) {
   };
 
   useEffect(() => {
-    getPokemons(API);
+    if (sort && sort !== 'All') {
+      getPokemons(`https://pokeapi.co/api/v2/type/${sort.toLowerCase()}`);
+    } else {
+      getPokemons(API);
+    }
   }, []);
 
   return (
@@ -72,21 +84,35 @@ function Home(props) {
         <input type="text" value={search} onChange={(e) => {
           setSearch(e.target.value)
           if (e.target.value !== '') {
-            setPage([0,160]);
+            sessionStorage.setItem('fpage', 0)
+            sessionStorage.setItem('lpage', 251)
+            setFPage(parseInt(sessionStorage.getItem('fpage')))
+            setLPage(parseInt(sessionStorage.getItem('lpage')))
           } else {
-            setPage([0,20]);
+            sessionStorage.setItem('fpage', 0)
+            sessionStorage.setItem('lpage', 20)
+            setFPage(parseInt(sessionStorage.getItem('fpage')))
+            setLPage(parseInt(sessionStorage.getItem('lpage')))
           }
         }}/>
         <div>
-          {types.map((e) => <button testcolor="pink" style={{background: sort === e.type ? e.color : '#777'}} key={`${e.type}-button`} onClick={() => {
+          {types.map((e) => <button style={{background: sort === e.type ? e.color : '#777'}} key={`${e.type}-button`} onClick={() => {
         if (sort === e.type) {
           getPokemons(API);
-          setSort('All');
-          setPage([0,20]);
+          sessionStorage.setItem('pokeType', 'All')
+          setSort(sessionStorage.getItem('pokeType'))
+          sessionStorage.setItem('fpage', 0)
+          sessionStorage.setItem('lpage', 20)
+          setFPage(parseInt(sessionStorage.getItem('fpage')))
+          setLPage(parseInt(sessionStorage.getItem('lpage')))
         } else {
-          getPokemons(`https://pokeapi.co/api/v2/type/${e.number}`);
-          setSort(e.type);
-          setPage([0,20]);
+          getPokemons(`https://pokeapi.co/api/v2/type/${e.type.toLowerCase()}`);
+          sessionStorage.setItem('pokeType', e.type)
+          setSort(sessionStorage.getItem('pokeType'))
+          sessionStorage.setItem('fpage', 0)
+          sessionStorage.setItem('lpage', 20)
+          setFPage(parseInt(sessionStorage.getItem('fpage')))
+          setLPage(parseInt(sessionStorage.getItem('lpage')))
         }
       }}>{e.type}</button>)}
         
@@ -97,22 +123,25 @@ function Home(props) {
 
 <div className="pokedex">
   {props.pokedex ? (
-        props.pokedex.slice(page[0],page[1]).map((e) => e.data.name.startsWith(search.toLowerCase()) && <Card key={e.data.name} name={e.data.name} sprite={Object.values(e.data.sprites.other)[2].front_default} selectPokemon={selectPokemon} pokemon={e.data} types={e.data.types} colours={colours} id={e.data.id} />)
+        props.pokedex.slice(fPage, lPage).map((e) => e.data.name.startsWith(search.toLowerCase()) && <Card key={e.data.name} name={e.data.name} sprite={Object.values(e.data.sprites.other)[2].front_default} selectPokemon={selectPokemon} pokemon={e.data} types={e.data.types} colours={colours} id={e.data.id} />)
       ) : (
         <h1>Loading</h1>
       )}
       {noPokemon()}
 </div>
       
-
-      <div className="skip"><button disabled={page[0] === 0} onClick={() => {
-        if (page[0] >= 20) {
-          setPage([page[0] -20, page[1] -20])
-        }
-      }}>{'<'}</button><button disabled={page[1] >= props.pokedex.length} onClick={() => {
-        if (page[1] < props.pokedex.length) {
-          setPage([page[0] +20, page[1] +20])
-        }
+      <div className="skip"><button disabled={fPage === 0} onClick={() => {
+        sessionStorage.setItem('fpage', parseInt(sessionStorage.getItem('fpage')) -20)
+        sessionStorage.setItem('lpage', parseInt(sessionStorage.getItem('lpage')) -20)
+        setFPage(parseInt(sessionStorage.getItem('fpage')))
+        setLPage(parseInt(sessionStorage.getItem('lpage')))
+        
+      }}>{'<'}</button><button disabled={lPage >= props.pokedex.length} onClick={() => {
+        sessionStorage.setItem('fpage', parseInt(sessionStorage.getItem('fpage')) +20)
+        sessionStorage.setItem('lpage', parseInt(sessionStorage.getItem('lpage')) +20)
+        setFPage(parseInt(sessionStorage.getItem('fpage')))
+        setLPage(parseInt(sessionStorage.getItem('lpage')))
+        
       }}>{'>'}</button></div>
     </div>
   );
