@@ -9,7 +9,7 @@ const Card = ({name, sprite, types, selectPokemon, pokemon, colours, id}) => {
           let x = e.clientX;
           let y = e.clientY;
         }} to={`/${name}`}>
-          <img alt={name} src={sprite}/>
+          <img alt={name} src={sprite} />
         </Link>
         <div className="name">
         <h2>{name[0].toUpperCase() + name.substring(1)}</h2>

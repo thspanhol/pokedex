@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "../../Componentes/Card";
 import './home.css'
+import { hover } from "@testing-library/user-event/dist/hover";
 
 function Home(props) {
 
   const { dispatch } = props;
   const [fPage, setFPage] = useState(parseInt(sessionStorage.getItem('fpage')));
   const [lPage, setLPage] = useState(parseInt(sessionStorage.getItem('lpage')));
-  if (!fPage && !lPage) {
+  if ((!fPage && !lPage) || (fPage === 0 && lPage === 251)) {
     sessionStorage.setItem('fpage', 0)
     sessionStorage.setItem('lpage', 20)
   }
@@ -81,7 +82,7 @@ function Home(props) {
       <div className="bar">
        
           <img alt="icon" src="./icon-pokebola.png" />
-        <input type="text" value={search} onChange={(e) => {
+        <input type="text" spellCheck={false} placeholder="Search Pokemon for Name" value={search} onChange={(e) => {
           setSearch(e.target.value)
           if (e.target.value !== '') {
             sessionStorage.setItem('fpage', 0)
@@ -125,7 +126,7 @@ function Home(props) {
   {props.pokedex ? (
         props.pokedex.slice(fPage, lPage).map((e) => e.data.name.startsWith(search.toLowerCase()) && <Card key={e.data.name} name={e.data.name} sprite={Object.values(e.data.sprites.other)[2].front_default} selectPokemon={selectPokemon} pokemon={e.data} types={e.data.types} colours={colours} id={e.data.id} />)
       ) : (
-        <h1>Loading</h1>
+        <img alt="loading" src='./poke-loading.gif' className="loading"/>
       )}
       {noPokemon()}
 </div>

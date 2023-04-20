@@ -31,6 +31,9 @@
     font-family: 'Franklin Gothic Medium';
     color: #252525;
 }
+.bar input::placeholder {
+    font-size: 15px;
+}
 .bar div {
     width: 60%;
     display: flex;
@@ -75,7 +78,14 @@
 }
 .skip button:disabled {
     opacity: 0.5;
+    cursor: default;
 }
 .skip button:nth-child(1){
     margin-right: 20px;
 }
+.loading {
+    margin-top: 25vh;
+    margin-bottom: 25vh;
+    width: 250px;
+}
+/* 640 */

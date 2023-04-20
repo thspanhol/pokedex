@@ -37,13 +37,20 @@ const Pokemon = ({pokemon}) => {
                   </div>
                   
                   <div className="stats">
-                    <div>
+                    <div className="gameStatus">
                       <img className="firstchibi" alt={`${pokemon.name}-game_sprite`} src={pokemon.sprites.back_default} />
-                      <h2>Game status</h2>
+                      <h2>Game Status</h2>
                       <img className="secoundchibi" alt={`${pokemon.name}-game_sprite`} src={pokemon.sprites.front_default} />
                     </div>
                     <div className="numbers">
-                      {pokemon.stats.map((e) => <h3 key={e.stat.name}>{`${e.stat.name[0].toUpperCase() + e.stat.name.substring(1)}: ${e.base_stat}`}</h3>)}
+                      {pokemon.stats.map((e) => {
+                        return (<div key={e.stat.name}>
+                          <h3>{`${e.stat.name[0].toUpperCase() + e.stat.name.substring(1)}`}</h3>
+                          <div className="skill" style={{border: `1px solid ${colours[pokemon.types[0].type.name]}`}}>
+                            <div className="skill_level" style={{width: `${e.base_stat/1.6}%`, background: colours[pokemon.types[0].type.name] }}></div>
+                          </div>
+                        </div>)
+                      })}
                     </div>
                     
                     <Link to='/' className="link">Back</Link>
