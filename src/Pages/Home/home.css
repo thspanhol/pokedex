@@ -88,4 +88,15 @@
     margin-bottom: 25vh;
     width: 250px;
 }
-/* 640 */
+@media screen and (max-width: 760px) {
+    .bar {
+        flex-direction: column;
+    }
+    .bar div {
+        width: 90%;
+        margin: 10px 0;
+    }
+    .bar input::placeholder {
+        text-align: center;
+    }
+}

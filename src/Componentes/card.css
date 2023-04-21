@@ -28,3 +28,19 @@
     margin-right: 10px;
     border-radius: 15px;
 }
+@media screen and (max-width: 760px) {
+    .card {
+        width: 40%;
+    }
+    .card img{
+        width: 100%;
+    }
+    .name h2 {
+        margin: 1px 0.5px;
+        font-size: 90%;
+    }
+    .types h3 {
+        width: 37.5%;
+        font-size: 80%;
+    }
+}
