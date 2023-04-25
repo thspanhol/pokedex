@@ -69,9 +69,15 @@
     border-radius: 15px;
     padding: 2px;
 }
+@keyframes status {
+    0% {
+      width: 0%;
+    }  
+  }
 .skill_level {
-    height: 10px;
-    border-radius: 15px;
+  height: 10px;
+  border-radius: 15px;
+  animation: status 0.7s linear;
 }
 .firstchibi {
     margin-right: -7.5px;
