@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "../../Componentes/Card";
 import './home.css'
-import { hover } from "@testing-library/user-event/dist/hover";
 
 function Home(props) {
 
@@ -81,7 +80,7 @@ function Home(props) {
     <div className="home">
       <div className="bar">
        
-          <img alt="icon" src="./icon-pokebola.png" />
+          <img alt="icon" src="https://raw.githubusercontent.com/thspanhol/pokedex/main/public/icon-pokebola.png" />
         <input type="text" spellCheck={false} placeholder="Search Pokemon for Name" value={search} onChange={(e) => {
           setSearch(e.target.value)
           if (e.target.value !== '') {
@@ -126,7 +125,7 @@ function Home(props) {
   {props.pokedex ? (
         props.pokedex.slice(fPage, lPage).map((e) => e.data.name.startsWith(search.toLowerCase()) && <Card key={e.data.name} name={e.data.name} sprite={Object.values(e.data.sprites.other)[2].front_default} selectPokemon={selectPokemon} pokemon={e.data} types={e.data.types} colours={colours} id={e.data.id} />)
       ) : (
-        <img alt="loading" src='./poke-loading.gif' className="loading"/>
+        <img alt="loading" src='https://raw.githubusercontent.com/thspanhol/pokedex/main/public/poke-loading.gif' className="loading"/>
       )}
       {noPokemon()}
 </div>
