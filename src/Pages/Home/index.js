@@ -33,7 +33,10 @@ function Home(props) {
     await axios
     .get(endpoint)
     .then((res) => results = res.data.results || res.data.pokemon)
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+      window.location.reload();
+    });
     let endPoints = results.map((e) => e.url || e.pokemon.url);
     endPoints = endPoints.filter((e) => filtro(e) <= limit);
     axios.all(endPoints.map((endpoint) => axios.get(endpoint))).then((res) => dispatch(setPokedex(res)));
