@@ -13,6 +13,8 @@ function Home(props) {
   if ((!fPage && !lPage) || (fPage === 0 && lPage === 251)) {
     sessionStorage.setItem('fpage', 0)
     sessionStorage.setItem('lpage', 20)
+    setFPage(parseInt(sessionStorage.getItem('fpage')))
+    setLPage(parseInt(sessionStorage.getItem('lpage')))
   }
   const limit = 251;
   const API = `https://pokeapi.co/api/v2/pokemon?limit=${limit}`;
@@ -33,10 +35,7 @@ function Home(props) {
     await axios
     .get(endpoint)
     .then((res) => results = res.data.results || res.data.pokemon)
-    .catch((err) => {
-      console.log(err);
-      window.location.reload();
-    });
+    .catch((err) => console.log(err));
     let endPoints = results.map((e) => e.url || e.pokemon.url);
     endPoints = endPoints.filter((e) => filtro(e) <= limit);
     axios.all(endPoints.map((endpoint) => axios.get(endpoint))).then((res) => dispatch(setPokedex(res)));
