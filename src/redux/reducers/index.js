@@ -3,8 +3,8 @@ import pokemonreducer from "./pokemonreducer";
 import userreducer from "./userreducer";
 
 const rootReducer = combineReducers({
-    pokemonreducer,
-    userreducer,
+  pokemonreducer,
+  userreducer,
 });
 
 export default rootReducer;

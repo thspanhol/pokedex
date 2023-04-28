@@ -1,102 +1,102 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 .home {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: whitesmoke;
-    min-height: 100vh;  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: whitesmoke;
+  min-height: 100vh;
 }
 .bar {
-    display: flex;
-    width: 100%;
-    max-width: 1600px;
-    background: #252525;
-    justify-content: space-around;
-    align-items: center;
-    border-radius: 0 0 15px 15px;
+  display: flex;
+  width: 100%;
+  max-width: 1600px;
+  background: #252525;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 0 0 15px 15px;
 }
 .bar input {
-    height: 30px;
-    box-shadow: 0 0 0 0;
-    border: 0 none;
-    outline: 0;
-    font-size: 20px;
-    border-radius: 10px;
-    padding: 0 0 0 5px;
-    font-weight: bold;
-    font-family: 'Franklin Gothic Medium';
-    color: #252525;
+  height: 30px;
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+  font-size: 20px;
+  border-radius: 10px;
+  padding: 0 0 0 5px;
+  font-weight: bold;
+  font-family: "Franklin Gothic Medium";
+  color: #252525;
 }
 .bar input::placeholder {
-    font-size: 15px;
+  font-size: 15px;
 }
 .bar div {
-    width: 60%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .bar div button {
-    box-shadow: 0 0 0 0;
-    border: 0 none;
-    outline: 0;
-    width: 100px;
-    height: 25px;
-    margin: 3px;
-    border-radius: 15px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s;
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+  width: 100px;
+  height: 25px;
+  margin: 3px;
+  border-radius: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
 }
 .bar div button:hover {
-    color: whitesmoke;
-    width: 105px;
-    transition: 0.2s;
+  color: whitesmoke;
+  width: 105px;
+  transition: 0.2s;
 }
 .pokedex {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 1600px;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1600px;
+  justify-content: center;
 }
-.skip button{
-    box-shadow: 0 0 0 0;
-    border: 0 none;
-    outline: 0;
-    background: #252525;
-    color: white;
-    width: 50px;
-    height: 50px;
-    font-size: 30px;
-    border-radius: 25px;
-    margin-bottom: 5px;
-    cursor: pointer;
+.skip button {
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+  background: #252525;
+  color: white;
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  border-radius: 25px;
+  margin-bottom: 5px;
+  cursor: pointer;
 }
 .skip button:disabled {
-    opacity: 0.5;
-    cursor: default;
+  opacity: 0.5;
+  cursor: default;
 }
-.skip button:nth-child(1){
-    margin-right: 20px;
+.skip button:nth-child(1) {
+  margin-right: 20px;
 }
 .loading {
-    margin-top: 25vh;
-    margin-bottom: 25vh;
-    width: 250px;
+  margin-top: 25vh;
+  margin-bottom: 25vh;
+  width: 250px;
 }
 @media screen and (max-width: 760px) {
-    .bar {
-        flex-direction: column;
-    }
-    .bar div {
-        width: 90%;
-        margin: 10px 0;
-    }
-    .bar input::placeholder {
-        text-align: center;
-    }
+  .bar {
+    flex-direction: column;
+  }
+  .bar div {
+    width: 90%;
+    margin: 10px 0;
+  }
+  .bar input::placeholder {
+    text-align: center;
+  }
 }

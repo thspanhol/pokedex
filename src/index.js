@@ -1,16 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux';
-import store from './redux/store';
-import {
-  RouterProvider,
-  createHashRouter,
-} from "react-router-dom";
-import Home from './Pages/Home';
-import Pokemon from './Pages/Pokemon';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import { RouterProvider, createHashRouter } from "react-router-dom";
+import Home from "./Pages/Home";
+import Pokemon from "./Pages/Pokemon";
 
 const routerHash = createHashRouter([
   {
@@ -23,7 +20,7 @@ const routerHash = createHashRouter([
   },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>

@@ -1,163 +1,163 @@
-.page{
-    background: #252525;
-    display: flex;
-    min-height: 100vh;
-    min-width: 1000px;
-    align-items: center;
-    justify-content: center;
+.page {
+  background: #252525;
+  display: flex;
+  min-height: 100vh;
+  min-width: 1000px;
+  align-items: center;
+  justify-content: center;
 }
 .info {
-    display: flex;
-    background: whitesmoke;
-    width: 1000px;
-    min-width: 1000px;
-    height: 650px;
-    align-items: center;
-    justify-content: space-around;
-    border-radius: 15px;
+  display: flex;
+  background: whitesmoke;
+  width: 1000px;
+  min-width: 1000px;
+  height: 650px;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 15px;
 }
 .image {
-    width: 47.5%;
+  width: 47.5%;
 }
 .image h2 {
-    color: gray;
+  color: gray;
 }
 .image img {
-    background: lightgray;
-    border-radius: 15px;
+  background: lightgray;
+  border-radius: 15px;
 }
 .image div {
-    display: flex;
+  display: flex;
 }
-.image div h3{
-    width: 100px;
-    text-align: center;
-    padding: 1px 0;
-    border-radius: 15px;
-    margin-right: 10px;
-    margin-bottom: 5px;
+.image div h3 {
+  width: 100px;
+  text-align: center;
+  padding: 1px 0;
+  border-radius: 15px;
+  margin-right: 10px;
+  margin-bottom: 5px;
 }
 .stats {
-    width: 40%;
-    background: lightgray;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 15px;
-    padding: 0 0 10px 0;
+  width: 40%;
+  background: lightgray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+  padding: 0 0 10px 0;
 }
 .gameStatus {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 .numbers {
-    flex-direction: column;
-    align-items: center;
-    width: 65%;
+  flex-direction: column;
+  align-items: center;
+  width: 65%;
 }
 .numbers div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .skill {
-    background: #252525;
-    padding: 4px;
-    box-sizing: border-box;
-    border-radius: 2px;
-    width: 100px;
-    border-radius: 15px;
-    padding: 2px;
+  background: #252525;
+  padding: 4px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  width: 100px;
+  border-radius: 15px;
+  padding: 2px;
 }
 @keyframes status {
-    0% {
-      width: 0%;
-    }  
+  0% {
+    width: 0%;
   }
+}
 .skill_level {
   height: 10px;
   border-radius: 15px;
   animation: status 0.7s linear;
 }
 .firstchibi {
-    margin-right: -7.5px;
+  margin-right: -7.5px;
 }
 .secoundchibi {
-    margin-left: -7.5px;
+  margin-left: -7.5px;
 }
 .link {
-    box-shadow: 0 0 0 0;
-    border: 0 none;
-    outline: 0;
-    text-decoration: none;
-    position: absolute;
-    margin-top: 300px;
-    background: #252525;
-    color: whitesmoke;
-    width: 70px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 15px;
-    transition: 0.2s;
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+  text-decoration: none;
+  position: absolute;
+  margin-top: 300px;
+  background: #252525;
+  color: whitesmoke;
+  width: 70px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  transition: 0.2s;
 }
 .link:hover {
-    width: 80px;
-    transition: 0.2s;
+  width: 80px;
+  transition: 0.2s;
 }
 @media screen and (max-width: 760px) {
-    .page{
-        min-height: none;
-        width: 100%;
-        min-width: 100vw;
-    }
-    .info {
-        width: 350px;
-        min-width: 350px;
-        height: 630px;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-    }
-    .image {
-        width: 90%;
-        margin-top: -70px;
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-    }
-    .image img {
-        width: 200px;
-    }
-    .image div {
-        width: auto;
-    }
-    .image div h3{
-        font-size: 95%;
-        min-width: 80px;
-        margin: 5px 5px;
-    }
-    .stats {
-        width: 300px;
-        margin-top: 10px;
-        max-width: 250px;
-    }
-    .firstchibi {
-        margin-right: -5px;
-        width: 50px;
-    }
-    .secoundchibi {
-        margin-left: -5px;
-        width: 50px;
-    }
-    .numbers {
-        width: 90%;
-        font-size: 80%;
-    }
-    .link {
-        margin-top: 210px;
-    }
+  .page {
+    min-height: none;
+    width: 100%;
+    min-width: 100vw;
+  }
+  .info {
+    width: 350px;
+    min-width: 350px;
+    height: 630px;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .image {
+    width: 90%;
+    margin-top: -70px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+  .image img {
+    width: 200px;
+  }
+  .image div {
+    width: auto;
+  }
+  .image div h3 {
+    font-size: 95%;
+    min-width: 80px;
+    margin: 5px 5px;
+  }
+  .stats {
+    width: 300px;
+    margin-top: 10px;
+    max-width: 250px;
+  }
+  .firstchibi {
+    margin-right: -5px;
+    width: 50px;
+  }
+  .secoundchibi {
+    margin-left: -5px;
+    width: 50px;
+  }
+  .numbers {
+    width: 90%;
+    font-size: 80%;
+  }
+  .link {
+    margin-top: 210px;
+  }
 }
