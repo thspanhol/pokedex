@@ -22,7 +22,7 @@ npm start
 
 Ao abrir a aplicação será renderizada uma tela com todos os pokémons da primeira e segunda geração. A tela também conta com um input para pesquisa por nome e botões para filtro por tipo, além disso, clicando em cima do pokémon escolhido será aberta outra página contendo as estatísticas do mesmo.
 
-## ⚜️ Possiveis alterações
+## ⚜️ Possíveis alterações
 
 * Alterando o valor atribuído a variável limit contida na linha 12 do arquivo Home (src\Pages\Home\index.js), é possível aumentar ou diminuir o número de pokémons elencados na aplicação.
 
