@@ -1,6 +1,6 @@
 # ⚜️ Projeto Pokedex ⚜️
 
-O projeto foi desenvolvido com o intuito de utilizar a API do Pokéapi (pokeapi.co) para desenvolver uma pokedex, um buscador de pokemons que podem ser filtrados por tipo e/ou nome, além de conter as estatisticas individuais de cada um em uma segunda página!
+O projeto foi desenvolvido com o intuito de utilizar a API do Pokéapi (pokeapi.co) para desenvolver uma pokedex, um buscador de pokemons que podem ser filtrados por tipo e/ou nome, além de conter as estatísticas individuais em uma segunda página!
 
 ### ⚜️ Instalação
 
@@ -20,11 +20,11 @@ npm start
 ```
 ### ⚜️ Como Utilizar
 
-Ao abrir a aplicação será renderizada uma tela com todos os pokémons da primeira e segunda geração. A tela também conta com um input para pesquisa por nome e botões para filtro por tipo, além disso, clicando em cima do pokemon escolhido será aberta uma outra página contendo as estátisticas do pokemon clicado.
+Ao abrir a aplicação será renderizada uma tela com todos os pokémons da primeira e segunda geração. A tela também conta com um input para pesquisa por nome e botões para filtro por tipo, além disso, clicando em cima do pokémon escolhido será aberta outra página contendo as estatísticas do mesmo.
 
 ## ⚜️ Possiveis alterações
 
-* Alterando o valor atribuido a variável limit contida na linha 12 do arquivo Home (src\Pages\Home\index.js), é possivel aumentar ou diminuir o número de pokemons elencados na aplicação.
+* Alterando o valor atribuído a variável limit contida na linha 12 do arquivo Home (src\Pages\Home\index.js), é possível aumentar ou diminuir o número de pokémons elencados na aplicação.
 
 ## ⚜️ Construído com
 
