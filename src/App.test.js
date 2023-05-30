@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import App from './App';
 import { Provider } from "react-redux";
 import store from "./redux/store";
@@ -51,11 +51,4 @@ describe('Testes do Navbar', () => {
     expect(input).toHaveValue('char');
   }); 
 
- /*   test('Deve chamar a função ao clicar no botão', () => {
-    const função = jest.fn(() => console.log('Função Chamada'));
-    render(<button onClick={função}>teste</button>);
-    const btn = screen.getByRole('button');
-    userEvent.click(btn);
-    expect(função).toHaveBeenCalled();
-  });  */
 });
